@@ -1,0 +1,99 @@
+= Entry point
+
+Найти класс по имени, метод с аннотацией и вызвать его
+
+Пример взаимодействия:
+
+[source,text]
+----
+$ java -jar application.jar ru.hse.entrypointtask.demo.NoClass
+
+Такого класса нет
+
+$ java -jar application.jar ru.hse.entrypointtask.demo.EntryPointDemo
+
+Тестировщик заходит в бар и заказывает:
+
+кружку пива,
+2 кружки пива,
+0 кружек пива,
+999999999 кружек пива,
+ящерицу в стакане,
+–1 кружку пива,
+qwertyuip кружек пива.
+
+Первый реальный клиент заходит в бар и спрашивает, где туалет. Бар вспыхивает пламенем, все погибают.
+----
+
+== Задание
+
+=== Программа
+
+. Аргументом передаётся имя класса
+.. Если аргумент не передан, сообщить пользователю об ошибке
+. Действия программы:
+.. Найти класс по имени
+.. Найти метод с аннотацией link:src/main/java/ru/hse/entrypointtask/annotation/EntryPoint.java[`@EntryPoint`].
+Сообщить об ошибке, если:
+... Метода с такой аннотацией нет или их больше одного
+... Метод -- статический
+... Метод -- не публичный
+... Метод принимает параметры, кроме `this`
+.. Создать экземпляр класса:
+... Найти конструктор без параметров
+... Вызвать его
+... Сообщить об ошибках, аналогично методу с аннотацией
+.. Вызвать метод с аннотацией link:src/main/java/ru/hse/entrypointtask/annotation/EntryPoint.java[`@EntryPoint`]
+
+=== maven
+
+Настроить сборку `jar` link:pom.xml[`pom.xml`] с Вашим `mainClass`
+
+=== Тесты
+
+. Добавить зависимость на JUnit 5. См. https://junit.org/junit5/docs/current/user-guide/#running-tests-build-maven[документацию]
+. Добавить тесты для программы
+
+== Что смотреть
+
+. Reflection:
+.. Методы класса `Class`:
+... https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html#forName(java.lang.String)[`forName`] -- найти класс по имени
+... https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html#getDeclaredMethods()[`getDeclaredMethods`] -- получить объявленные методы
+... https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html#getDeclaredConstructor(java.lang.Class...)[`getDeclaredConstructor`] -- получить объявленный конструктор
+.. https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Method.html[`Method`], методы: `invoke`, `getAnnotation`
+.. Класс https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Constructor.html[`Constructor`], метод `newInstance`
+.. Методы класса `Modifier`, например, https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Modifier.html#isPublic(int)[`Modifier#isPublic`]
+.. https://stackoverflow.com/q/16635025/6486622[Dosen't Reflection API break the very purpose of Data encapsulation?]
+. Тесты:
+.. https://junit.org/junit5/docs/current/user-guide/[Документация JUnit]
+. Maven:
+.. https://maven.apache.org/guides/[Maven documentation]
+.. https://mkyong.com/maven/how-to-create-a-jar-file-with-maven/[How to create a jar file with Maven]
+
+== Пример на Reflection: найти класс по имени и создать его экземпляр
+
+[source,java]
+----
+package edu.reflection;
+
+import java.lang.reflect.Constructor;
+
+public class Instantiate {
+	public static void main(String[] args) throws ReflectiveOperationException {
+		Class<?> clazz = Class.forName("edu.reflection.Instantiate"); // <1>
+		Constructor<?> constructor = clazz.getDeclaredConstructor(); // <2>
+		Object instance = constructor.newInstance(); // <3>
+		System.out.println(instance); // <4>
+	}
+}
+----
+
+<1> Ищем класс по имени, метод -- https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html#forName(java.lang.String)[`Class#forName`]
+<2> Ищем конструктор без параметров -- https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html#getDeclaredConstructor(java.lang.Class...)[`Class#getDeclaredConstructor`]
+<3> Создаём экземпляр -- https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Constructor.html#newInstance(java.lang.Object...)[`Constructor#newInstance`]
+<4> Вывод
+
+== Срок
+
+До 21-го января
