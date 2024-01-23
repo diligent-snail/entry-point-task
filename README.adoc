@@ -58,18 +58,18 @@ qwertyuip кружек пива.
 
 . Reflection:
 .. Методы класса `Class`:
-... https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html#forName(java.lang.String)[`forName`] -- найти класс по имени
-... https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html#getDeclaredMethods()[`getDeclaredMethods`] -- получить объявленные методы
-... https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html#getDeclaredConstructor(java.lang.Class...)[`getDeclaredConstructor`] -- получить объявленный конструктор
-.. https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Method.html[`Method`], методы: `invoke`, `getAnnotation`
-.. Класс https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Constructor.html[`Constructor`], метод `newInstance`
-.. Методы класса `Modifier`, например, https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Modifier.html#isPublic(int)[`Modifier#isPublic`]
+... https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Class.html#forName(java.lang.String)[`forName`] -- найти класс по имени
+... https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Class.html#getDeclaredMethods()[`getDeclaredMethods`] -- получить объявленные методы
+... https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Class.html#getDeclaredConstructor(java.lang.Class...)[`getDeclaredConstructor`] -- получить объявленный конструктор
+.. https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/reflect/Method.html[`Method`], методы: `invoke`, `getAnnotation`
+.. Класс https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/reflect/Constructor.html[`Constructor`], метод `newInstance`
+.. Методы класса `Modifier`, например, https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/reflect/Modifier.html#isPublic(int)[`Modifier#isPublic`]
 .. https://stackoverflow.com/q/16635025/6486622[Dosen't Reflection API break the very purpose of Data encapsulation?]
 . Тесты:
 .. https://junit.org/junit5/docs/current/user-guide/[Документация JUnit]
 . Maven:
 .. https://maven.apache.org/guides/[Maven documentation]
-.. https://mkyong.com/maven/how-to-create-a-jar-file-with-maven/[How to create a jar file with Maven]
+.. https://maven.apache.org/shared/maven-archiver/examples/classpath.html[Make The Jar Executable]
 
 == Пример на Reflection: найти класс по имени и создать его экземпляр
 
@@ -89,11 +89,7 @@ public class Instantiate {
 }
 ----
 
-<1> Ищем класс по имени, метод -- https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html#forName(java.lang.String)[`Class#forName`]
-<2> Ищем конструктор без параметров -- https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html#getDeclaredConstructor(java.lang.Class...)[`Class#getDeclaredConstructor`]
-<3> Создаём экземпляр -- https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Constructor.html#newInstance(java.lang.Object...)[`Constructor#newInstance`]
+<1> Ищем класс по имени, метод -- https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Class.html#forName(java.lang.String)[`Class#forName`]
+<2> Ищем конструктор без параметров -- https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Class.html#getDeclaredConstructor(java.lang.Class...)[`Class#getDeclaredConstructor`]
+<3> Создаём экземпляр -- https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/reflect/Constructor.html#newInstance(java.lang.Object...)[`Constructor#newInstance`]
 <4> Вывод
-
-== Срок
-
-До 21-го января
